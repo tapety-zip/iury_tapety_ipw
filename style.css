@@ -2,8 +2,21 @@
     width: 200px;
     height: auto;
 }
-.banner  img{
-    width: 100%  ;
+.banner img {
+    width: 100%;
     height: 500px;
-    
+    object-fit: cover;
+}
+.navbar-rei {
+    background-color: #111;
+    padding: 10px 30px;
+}
+.navbar-rei .nav-link {
+    color: white;
+    font-weight: 500;
+    margin: 0 8px;
+}
+
+.navbar-rei .nav-link:hover {
+    color: #ffc107;
 }
