@@ -2,6 +2,9 @@
     width: 200px;
     height: auto;
 }
+
+
+
 .banner img {
     width: 100%;
     height: 500px;
@@ -19,4 +22,43 @@
 
 .navbar-rei .nav-link:hover {
     color: #ffc107;
+}
+
+
+
+.guarana-img {
+    width: 160px;
+}
+.produto-imagem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.rodape {
+    background-color: #198754;
+    color: white;
+    padding: 50px 0 20px;
+    margin-top: 60px;
+}
+
+.rodape h4,
+.rodape h5 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.rodape p {
+    margin-bottom: 8px;
+}
+
+.rodape hr {
+    border-color: rgba(255, 255, 255, 0.3);
+    margin: 30px 0 20px;
+}
+
+.rodape {
+    background-color: #0f5132;
 }
