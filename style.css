@@ -62,3 +62,40 @@
 .rodape {
     background-color: #0f5132;
 }
+
+
+.carrinho {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    max-width: 700px;
+}
+
+.item-carrinho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.item-carrinho p {
+    margin: 5px 0 0;
+    color: #666;
+}
+
+.item-carrinho span {
+    font-weight: bold;
+}
+
+#aviso-compra {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}

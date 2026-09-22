@@ -20,7 +20,14 @@
 
 
 </head>
+
 <body>
+    <!--AVISO DE COMPRA-->
+    <div id="aviso-compra" class="alert alert-success text-center m-0" role="alert">
+    Compra realizada com sucesso! Obrigado por comprar na Rei da Gelada! 👑🍻
+    </div>
+
+
     <nav class="navbar navbar-expand-lg navbar-rei">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
@@ -28,7 +35,7 @@
             </a>
 
 
-            <!--Accordion Gallery-->
+            <!--NAV BAR-->
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -60,7 +67,7 @@
         </div>
     </nav>
 
-    <!--section class="banner"-->
+    <!--BANNER-->
     <section class="banner">  
             <img src="imagens/banner.png" alt="bannerreigelada">
             </a>
@@ -108,7 +115,9 @@
                             R$ 8,00
                         </h4>
 
-                        <button class="btn btn-rei w-100">
+                        <button class="btn btn-rei w-100 btn-adicionar"
+                        data-produto="Heineken"
+                        data-preco="8.00">
                             Adicionar
                         </button>
                     </div>
@@ -145,7 +154,9 @@
                             R$ 5,00
                         </h4>
 
-                        <button class="btn btn-rei w-100">
+                        <button class="btn btn-rei w-100 btn-adicionar"
+                        data-produto="Skol"
+                        data-preco="5.00">
                             Adicionar
                         </button>
 
@@ -183,7 +194,9 @@
                             R$ 6,00
                         </h4>
 
-                        <button class="btn btn-rei w-100">
+                        <button class="btn btn-rei w-100 btn-adicionar"
+                        data-produto="Coca Cola"
+                        data-preco="6.00">
                             Adicionar
                         </button>
 
@@ -221,7 +234,9 @@
                             R$ 5,50
                         </h4>
 
-                        <button class="btn btn-rei w-100">
+                        <button class="btn btn-rei w-100 btn-adicionar"
+                        data-produto="Guaraná Antarctica"
+                        data-preco="5.50">
                             Adicionar
                         </button>
 
@@ -235,7 +250,29 @@
 
 </section>
 
-</body>
+<!-- CARRINHO -->
+<div class="carrinho">
+    <h3>🛒 Seu Carrinho</h3>
+
+    <div id="itens-carrinho">
+        <p>Nenhum produto adicionado.</p>
+    </div>
+
+    <hr>
+
+    <h4>
+        Total: R$ <span id="total-carrinho">0,00</span>
+    </h4>
+
+    <button class="btn btn-rei w-100 mt-3" id="finalizar-compra">
+        Finalizar compra
+    </button>
+</div>
+
+
+ <!--CONEXAO DO JAVA COM HTML-->
+ <script src="java.js"></script>
+
 
  <!--RODAPE-->
 <footer id="contato" class="rodape">
@@ -244,7 +281,7 @@
 
             <!-- Sobre -->
             <div class="col-md-4 mb-4">
-                <h4>Rei do Guaraná</h4>
+                <h4>Rei da Gelada</h4>
                 <p>
                     O sabor que faz você se sentir um rei.
                 </p>
@@ -255,7 +292,7 @@
                 <h5>Contato</h5>
 
                 <p>📞 (89) 4002-8922</p>
-                <p>✉️ ReinoGelado@Hotmail.com</p>
+                <p>✉️ ReinoGelada@Hotmail.com</p>
                 <p>📷 @ReidaGelada</p>
             </div>
 
@@ -275,10 +312,14 @@
 
         <div class="text-center">
             <p class="mb-0">
-                © 2026 Rei do Guaraná — Todos os direitos reservados a Tapety e Iury.
+                © 2026 Rei da Gelada — Todos os direitos reservados a Tapety e Iury.
             </p>
         </div>
     </div>
 </footer>
+
+</body>
+
+ 
 
 </html>
