@@ -1,114 +1,45 @@
-// ==========================
+// ==========================================
 // CARRINHO
-// ==========================
+// ==========================================
 
 let carrinho = [];
-
-
-// ==========================
-// ESTOQUE DOS PRODUTOS
-// ==========================
-
-// Defina aqui quantas unidades existem de cada produto
-let estoque = {
-    "Heineken": 20,
-    "Skol": 30,
-    "Coca Cola": 25,
-    "Guaraná Antarctica": 20
-};
-
 
 const botoesAdicionar = document.querySelectorAll(".btn-adicionar");
 const itensCarrinho = document.getElementById("itens-carrinho");
 const totalCarrinho = document.getElementById("total-carrinho");
+const botaoFinalizar = document.getElementById("finalizar-compra");
 
 
-// ==========================
-// MOSTRAR ESTOQUE NOS CARDS
-// ==========================
+// ==========================================
+// ADICIONAR PRODUTO AO CARRINHO
+// ==========================================
 
-botoesAdicionar.forEach(botao => {
+botoesAdicionar.forEach(function (botao) {
 
-    const nome = botao.dataset.produto;
-    const quantidadeEstoque = estoque[nome];
+    botao.addEventListener("click", function () {
 
-    const cardBody = botao.closest(".card-body");
+        const produto = botao.getAttribute("data-produto");
+        const preco = parseFloat(botao.getAttribute("data-preco"));
 
-    // Cria o texto do estoque
-    const estoqueTexto = document.createElement("p");
-
-    estoqueTexto.classList.add("estoque-texto");
-
-    estoqueTexto.innerHTML = `
-        Estoque: <span class="quantidade-estoque">${quantidadeEstoque}</span> unidades
-    `;
-
-    // Coloca o estoque antes do botão
-    cardBody.insertBefore(estoqueTexto, botao);
-
-
-    // Se o produto já estiver sem estoque
-    if (quantidadeEstoque === 0) {
-
-        botao.disabled = true;
-        botao.textContent = "Esgotado";
-
-    }
-
-});
-
-
-// ==========================
-// BOTÃO ADICIONAR
-// ==========================
-
-botoesAdicionar.forEach(botao => {
-
-    botao.addEventListener("click", () => {
-
-        const nome = botao.dataset.produto;
-        const preco = parseFloat(botao.dataset.preco);
-
-        // Procura o produto dentro do carrinho
+        // Verifica se o produto já está no carrinho
         const produtoExistente = carrinho.find(
-            produto => produto.nome === nome
+            item => item.nome === produto
         );
 
-
-        // Descobre quantas unidades desse produto
-        // já estão no carrinho
-        const quantidadeNoCarrinho = produtoExistente
-            ? produtoExistente.quantidade
-            : 0;
-
-
-        // Verifica se ainda há estoque disponível
-        if (quantidadeNoCarrinho >= estoque[nome]) {
-
-            alert("Não há mais unidades disponíveis desse produto.");
-            return;
-
-        }
-
-
-        // Se o produto já estiver no carrinho
         if (produtoExistente) {
 
             produtoExistente.quantidade++;
 
         } else {
 
-            // Se ainda não estiver, adiciona
             carrinho.push({
-                nome: nome,
+                nome: produto,
                 preco: preco,
                 quantidade: 1
             });
 
         }
 
-
-        // Atualiza o carrinho
         atualizarCarrinho();
 
     });
@@ -116,201 +47,240 @@ botoesAdicionar.forEach(botao => {
 });
 
 
-// ==========================
+// ==========================================
 // ATUALIZAR CARRINHO
-// ==========================
+// ==========================================
 
 function atualizarCarrinho() {
 
     itensCarrinho.innerHTML = "";
 
+    if (carrinho.length === 0) {
+
+        itensCarrinho.innerHTML =
+            "<p>Nenhum produto adicionado.</p>";
+
+        totalCarrinho.textContent = "0,00";
+
+        return;
+    }
+
+
     let total = 0;
 
 
-    // Verifica se o carrinho está vazio
-    if (carrinho.length === 0) {
+    carrinho.forEach(function (item, index) {
 
-        itensCarrinho.innerHTML = `
-            <p>Nenhum produto adicionado.</p>
-        `;
+        const subtotal = item.preco * item.quantidade;
 
-    } else {
-
-        // Percorre todos os produtos do carrinho
-        carrinho.forEach((produto, index) => {
-
-            // Calcula o subtotal
-            const subtotal =
-                produto.preco * produto.quantidade;
-
-            // Soma ao total
-            total += subtotal;
+        total += subtotal;
 
 
-            // Mostra o produto na tela
-            itensCarrinho.innerHTML += `
-                <div class="item-carrinho">
+        const div = document.createElement("div");
 
-                    <div>
-                        <strong>${produto.nome}</strong>
+        div.classList.add("item-carrinho", "mb-3");
 
-                        <p>
-                            ${produto.quantidade}x
-                            R$ ${produto.preco
-                                .toFixed(2)
-                                .replace(".", ",")}
-                        </p>
-                    </div>
+
+        div.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <strong>${item.nome}</strong>
+
+                    <br>
+
+                    <small>
+                        R$ ${item.preco.toFixed(2).replace(".", ",")}
+                    </small>
+                </div>
+
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <button
+                        class="btn btn-sm btn-outline-secondary"
+                        onclick="diminuirQuantidade(${index})">
+                        -
+                    </button>
+
 
                     <span>
-                        R$ ${subtotal
-                            .toFixed(2)
-                            .replace(".", ",")}
+                        ${item.quantidade}
                     </span>
+
+
+                    <button
+                        class="btn btn-sm btn-outline-secondary"
+                        onclick="aumentarQuantidade(${index})">
+                        +
+                    </button>
+
 
                     <button
                         class="btn btn-sm btn-danger"
                         onclick="removerProduto(${index})">
-                        Remover
+                        🗑️
                     </button>
 
                 </div>
-            `;
 
-        });
-
-    }
+            </div>
 
 
-    // Mostra o total
-    totalCarrinho.textContent = total
-        .toFixed(2)
-        .replace(".", ",");
+            <div class="text-end">
+
+                Subtotal:
+                <strong>
+                    R$ ${subtotal.toFixed(2).replace(".", ",")}
+                </strong>
+
+            </div>
+        `;
+
+
+        itensCarrinho.appendChild(div);
+
+    });
+
+
+    totalCarrinho.textContent =
+        total.toFixed(2).replace(".", ",");
 
 }
 
 
-// ==========================
-// REMOVER PRODUTO DO CARRINHO
-// ==========================
+// ==========================================
+// AUMENTAR QUANTIDADE
+// ==========================================
+
+function aumentarQuantidade(index) {
+
+    carrinho[index].quantidade++;
+
+    atualizarCarrinho();
+
+}
+
+
+// ==========================================
+// DIMINUIR QUANTIDADE
+// ==========================================
+
+function diminuirQuantidade(index) {
+
+    if (carrinho[index].quantidade > 1) {
+
+        carrinho[index].quantidade--;
+
+    } else {
+
+        carrinho.splice(index, 1);
+
+    }
+
+    atualizarCarrinho();
+
+}
+
+
+// ==========================================
+// REMOVER PRODUTO
+// ==========================================
 
 function removerProduto(index) {
 
-    // Remove o produto do array
     carrinho.splice(index, 1);
 
-    // Atualiza a tela
     atualizarCarrinho();
 
 }
 
 
-// ==========================
-// ATUALIZAR ESTOQUE NA TELA
-// ==========================
-
-function atualizarEstoqueNaTela(nome) {
-
-    botoesAdicionar.forEach(botao => {
-
-        if (botao.dataset.produto === nome) {
-
-            const cardBody =
-                botao.closest(".card-body");
-
-            const quantidadeEstoque =
-                cardBody.querySelector(".quantidade-estoque");
-
-
-            // Atualiza o número mostrado
-            quantidadeEstoque.textContent =
-                estoque[nome];
-
-
-            // Se acabar o estoque
-            if (estoque[nome] === 0) {
-
-                botao.disabled = true;
-                botao.textContent = "Esgotado";
-
-            } else {
-
-                botao.disabled = false;
-                botao.textContent = "Adicionar";
-
-            }
-
-        }
-
-    });
-
-}
-
-
-// ==========================
+// ==========================================
 // FINALIZAR COMPRA
-// ==========================
+// ==========================================
 
-const finalizarCompra =
-    document.getElementById("finalizar-compra");
-
-const avisoCompra =
-    document.getElementById("aviso-compra");
-
-
-finalizarCompra.addEventListener("click", () => {
-
+botaoFinalizar.addEventListener("click", function () {
 
     // Verifica se o carrinho está vazio
+
     if (carrinho.length === 0) {
 
-        alert(
-            "Adicione algum produto ao carrinho antes de finalizar a compra."
-        );
+        alert("Seu carrinho está vazio!");
 
         return;
-
     }
 
 
-    // ==========================
-    // DIMINUIR O ESTOQUE
-    // ==========================
+    // Gera o código PIX
 
-    carrinho.forEach(produto => {
+    gerarQRCode();
 
-        estoque[produto.nome] =
-            estoque[produto.nome] - produto.quantidade;
 
-        atualizarEstoqueNaTela(produto.nome);
+    // Abre o modal
+
+    const modalPix =
+        new bootstrap.Modal(
+            document.getElementById("modalPix")
+        );
+
+    modalPix.show();
+
+});
+
+
+// ==========================================
+// GERAR QR CODE
+// ==========================================
+
+function gerarQRCode() {
+
+    // Gera números aleatórios
+
+    const numeroAleatorio =
+        Math.floor(
+            Math.random() * 1000000000
+        );
+
+
+    // Cria o código PIX fictício
+
+    const codigoPix =
+        "PIX-REI-GELADA-" +
+        numeroAleatorio;
+
+
+    // Coloca o código no campo
+
+    document.getElementById("codigoPix").value =
+        codigoPix;
+
+
+    // Limpa o QR Code anterior
+
+    const areaQRCode =
+        document.getElementById("qrcode");
+
+    areaQRCode.innerHTML = "";
+
+
+    // Cria o novo QR Code
+
+    new QRCode(areaQRCode, {
+
+        text: codigoPix,
+
+        width: 200,
+
+        height: 200
 
     });
 
-
-    // ==========================
-    // MOSTRAR AVISO DE COMPRA
-    // ==========================
-
-    avisoCompra.style.display = "block";
+}
 
 
-    // ==========================
-    // LIMPAR O CARRINHO
-    // ==========================
+// ==========================================
+// INICIALIZA O CARRINHO
+// ==========================================
 
-    carrinho = [];
-
-    atualizarCarrinho();
-
-
-    // ==========================
-    // ESCONDER AVISO APÓS 4 SEGUNDOS
-    // ==========================
-
-    setTimeout(() => {
-
-        avisoCompra.style.display = "none";
-
-    }, 4000);
-
-});
+atualizarCarrinho();

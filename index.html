@@ -46,19 +46,9 @@
                 <a class="nav-link" aria-current="page" href="#">Inicio</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Produtos</a>
+                <a class="nav-link" href="#contato">contato</a>
                 </li>
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#contato" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Contato
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-                </li>
+                
             </ul>
             </div>
         </div>
@@ -118,9 +108,7 @@
                         Adicionar
                         </button>
 
-                        <p class="estoque-texto">
-                            Estoque: <span class="quantidade-estoque">50</span> unidades
-                        </p>
+
                     </div>
 
                 </div>
@@ -161,9 +149,7 @@
                         Adicionar
                         </button>
 
-                        <p class="estoque-texto">
-                            Estoque: <span class="quantidade-estoque">50</span> unidades
-                        </p>
+                        
                     </div>
 
                 </div>
@@ -204,9 +190,7 @@
                         Adicionar
                         </button>
 
-                        <p class="estoque-texto">
-                            Estoque: <span class="quantidade-estoque">50</span> unidades
-                        </p>
+                        
                     </div>
 
                 </div>
@@ -247,9 +231,7 @@
                         Adicionar
                         </button>
 
-                        <p class="estoque-texto">
-                            Estoque: <span class="quantidade-estoque">50</span> unidades
-                        </p>
+                       
                     </div>
 
                 </div>
@@ -280,8 +262,6 @@
 </div>
 
 
- <!--CONEXAO DO JAVA COM HTML-->
- <script src="java.js"></script>
 
 
  <!--RODAPE-->
@@ -304,6 +284,25 @@
                 <p>📞 (89) 4002-8922</p>
                 <p>✉️ ReinoGelada@Hotmail.com</p>
                 <p>📷 @ReidaGelada</p>
+
+                <div class="row">
+                    <ul>
+                        <p>
+                            
+                            <a href="https://www.instagram.com/tapety_opp/" target="_blank">
+                            Contato do Dono Tapety
+                            </a>
+                        
+                        </p>
+                        
+                        <p>
+
+                            <a href="https://www.instagram.com/wfmarqs_/" target="_blank">
+                                    Contato do Dono subordinado Iury
+                                </a>
+                    </ul>
+                        </p>
+                </div>
             </div>
 
             <!-- Localização -->
@@ -327,6 +326,41 @@
         </div>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script src="java.js"></script>
+
+<div class="modal fade" id="modalPix" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4">
+
+            <h3>Pagamento via PIX</h3>
+
+            <p>Escaneie o QR Code abaixo:</p>
+
+            <div id="qrcode" class="d-flex justify-content-center my-3"></div>
+
+            <p><strong>PIX copia e cola:</strong></p>
+
+            <input
+                type="text"
+                id="codigoPix"
+                class="form-control"
+                readonly
+            >
+
+            <button
+                class="btn btn-success mt-3"
+                data-bs-dismiss="modal"
+            >
+                Finalizar
+            </button>
+
+        </div>
+    </div>
+</div>
 
 </body>
 
