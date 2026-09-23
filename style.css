@@ -99,3 +99,15 @@
     width: 100%;
     z-index: 9999;
 }
+
+
+.estoque-texto {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.quantidade-estoque {
+    font-weight: bold;
+    color: #198754;
+}
